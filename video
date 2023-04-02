@@ -1,0 +1,30 @@
+from tkinter import *
+from pytube import YouTube
+
+# Fungsi untuk mengunduh video
+def download_video():
+    url = url_entry.get()  # Dapatkan URL dari input pengguna
+    yt = YouTube(url)
+    stream = yt.streams.first()
+    stream.download()
+    status_label.config(text="Video telah berhasil diunduh!")
+
+# Buat GUI dengan Tkinter
+root = Tk()
+root.title("Download Video dari YouTube")
+
+# Tambahkan label dan input untuk URL
+url_label = Label(root, text="Masukkan URL video YouTube:")
+url_label.pack()
+url_entry = Entry(root)
+url_entry.pack()
+
+# Tambahkan tombol untuk mengunduh video
+download_button = Button(root, text="Unduh Video", command=download_video)
+download_button.pack()
+
+# Tambahkan label untuk status unduhan
+status_label = Label(root, text="")
+status_label.pack()
+
+root.mainloop()
